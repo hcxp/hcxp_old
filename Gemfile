@@ -61,9 +61,11 @@ gem 'kaminari'
 # Markdown parser
 gem 'redcarpet'
 
+gem 'dotenv-rails'
+
 group :development do
   gem 'mina'
-  gem 'mina-multistage'
+  gem 'mina-multistage', require: false
 end
 
 group :test, :development do
