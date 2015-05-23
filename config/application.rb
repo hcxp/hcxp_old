@@ -48,7 +48,7 @@ class << Rails.application
   end
 
   def domain
-    "example.com"
+    "hcxp.co"
   end
 
   def name
