@@ -1,0 +1,45 @@
+/*
+ *= require select2
+ *= require_self
+*/
+
+$grid-gutter-width: 25px;
+$container-large-desktop: ((890px + $grid-gutter-width));
+$font-size-base: 16px;
+$blockquote-font-size: $font-size-base;
+
+@import 'variables';
+
+@import "bootstrap-sprockets";
+@import "bootstrap-custom";
+
+// @import "bourbon";
+@import "base/base";
+// @import "neat";
+
+// @import 'base/grid';
+
+@import 'structures/nav_sub';
+// @import 'structures/media';
+@import 'structures/vote';
+@import 'structures/story';
+@import 'structures/comments';
+@import 'structures/tag';
+// @import 'structures/main';
+@import 'structures/leader';
+@import 'structures/header';
+@import 'structures/footer';
+@import 'structures/buttons';
+@import 'structures/media';
+// @import 'structures/flash';
+// @import 'structures/form_horizontal';
+
+@import 'pages/stories_show';
+
+body {
+  // @include font-feature-settings("kern", "liga", "pnum");
+  -webkit-font-smoothing: antialiased;
+  color: $dark-gray;
+  font-family: 'open sans';
+  font-size: 16px;
+}

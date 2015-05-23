@@ -1,0 +1,15 @@
+.flash-error {
+  background: $brand-red;
+  border-radius: 3px;
+  color: darken($brand-red, 30%);
+  padding: 0.5em 0.8em;
+  margin-bottom: 0.75em;
+}
+
+.flash-success {
+  background: $brand-green;
+  border-radius: 3px;
+  color: darken($brand-green, 30%);
+  padding: 0.5em 0.8em;
+  margin-bottom: 0.75em;
+}

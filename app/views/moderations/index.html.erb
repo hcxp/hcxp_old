@@ -1,0 +1,62 @@
+<div class="col-sm-12">
+  <div class="box wide">
+    <h1 class="legend">
+      Moderation Log
+    </h1>
+
+    <table class="data table table-striped table-hover" width="100%" cellspacing=0>
+    <tr>
+      <th style="min-width: 130px;">Date/Time</th>
+      <th>Moderator</th>
+      <th>Story/Comment/User, Action, Reason</th>
+    </tr>
+    <% bit = 0 %>
+    <% @moderations.each do |mod| %>
+      <tr class="row<%= bit %> nobottom">
+        <td><%= mod.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><a href="/messages?to=<%= mod.moderator.try(:username) %>"><%=
+          mod.moderator.try(:username) %></a></td>
+        <td>
+          <% if mod.story %>
+            <a href="<%= mod.story.comments_path %>"><strong>Story:</strong> <%= mod.story.title
+              %></a>
+          <% elsif mod.comment %>
+            <a href="<%= mod.comment.url %>"><strong>Comment on</strong> <%=
+              mod.comment.story.title %></a>
+          <% elsif mod.user_id %>
+            <% if mod.user %>
+              <a href="/u/<%= mod.user.username %>"><strong>User</strong>
+                <%= mod.user.username %></a>
+            <% else %>
+              <strong>User</strong> <%= mod.user_id %> (Deleted)
+            <% end %>
+          <% end %>
+          <br/>
+          <strong>Action:</strong> <em><%= mod.action %></em>
+
+          <% if mod.reason.present? %>
+            <br/>
+            <strong>Reason:</strong> <em><%= mod.reason %></em>
+          <% end %>
+        </td>
+      </tr>
+      <% bit = (bit == 1 ? 0 : 1) %>
+    <% end %>
+    </table>
+  </div>
+
+  <div class="morelink">
+    <% if @page > 1 %>
+      <a href="/moderations/page/<%= @page - 1 %>">&lt;&lt; Page
+        <%= @page - 1 %></a>
+    <% end %>
+
+    <% if @pages > 1 && @page < @pages %>
+      <% if @page > 1 %>
+        |
+      <% end %>
+      <a href="/moderations/page/<%= @page + 1 %>">Page <%= @page + 1
+        %> &gt;&gt;</a>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="col-sm-12">
+  <h1 class="legend">
+    Login
+  </h1>
+
+  <%= form_tag login_path do %>
+    <div class="form-group">
+      <%= label_tag :email, "E-mail or Username:" %>
+      <%= text_field_tag :email, "", :size => 30, :autofocus => "autofocus", class: 'form-control', style: 'max-width: 300px;' %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :password, "Password:" %>
+      <%= password_field_tag :password, "", :size => 30, class: 'form-control', style: 'max-width: 300px;' %>
+    </div>
+
+    <div class="form-group">
+      <%= submit_tag "Login", class: 'btn btn-primary' %>
+    </div>
+
+    <p>
+    Forgot your password? <%= link_to "Reset your password",
+      forgot_password_path %>.
+    </p>
+
+    <p>
+    Not a user yet?  Signup is by invitation only to combat spam and increase
+    accountability.  If you know <a href="/u/">a current user</a> of the site,
+    ask them for an
+    <% if Rails.application.allow_invitation_requests? %>
+      invitation or <a href="/invitations/request">request one publicly</a>.
+    <% else %>
+      invitation.
+    <% end %>
+    </p>
+
+    <% if @referer.present? %>
+      <%= hidden_field_tag :referer, @referer %>
+    <% end %>
+  <% end %>
+</div>

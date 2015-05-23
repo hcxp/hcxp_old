@@ -1,0 +1,68 @@
+<div class="comment comment_form_container"
+data-shortid="<%= comment.short_id if comment.persisted? %>">
+<%= form_for comment,
+:html => { :id => "edit_comment_#{comment.short_id}" } do |f| %>
+  <% if comment.errors.any? %>
+    <%= errors_for comment %>
+  <% end %>
+
+  <%= hidden_field_tag "story_id", comment.story.short_id %>
+
+  <% if comment.parent_comment %>
+    <%= hidden_field_tag "parent_comment_short_id",
+      comment.parent_comment.short_id %>
+  <% end %>
+
+  <div>
+    <div class="form-group">
+      <%= text_area_tag "comment", comment.comment, :rows => 5, class: 'form-control',
+        :autocomplete => "off", :disabled => !@user,
+        :placeholder => (@user ? "Post your comment..." : "You must be logged in to leave a comment.")
+        %>
+    </div>
+
+    <div class="markdown_help_toggler">
+      <% if @user %>
+        <div class="markdown_help_label text-muted">
+          Markdown formatting available
+        </div>
+        <div class="markdown_help_label markdown_help_label_mobile"
+        style="display: none;">
+          [M&darr;]
+        </div>
+      <% end %>
+
+      <%= button_tag "#{comment.new_record?? "Post" : "Update"}",
+        :class => "comment-post btn btn-primary", :type => "button",
+        :disabled => !@user %>
+      <%= button_tag "Preview", :class => "btn btn-default comment-preview",
+        :type => "button", :disabled => !@user %>
+      <% if comment.persisted? || comment.parent_comment_id %>
+        &nbsp;
+        <%= button_tag "Cancel", :class => "comment-cancel",
+          :type => "button" %>
+      <% end %>
+
+      <% if @user && @user.hats.any? %>
+        <div style="display: inline-block; margin-left: 1em;">
+        Put on hat:
+        <%= select_tag "hat_id",
+          options_from_collection_for_select(@user.hats, "id", "hat",
+          comment.hat_id), :include_blank => true %>
+        </div>
+      <% end %>
+
+      <div style="clear: both;"></div>
+
+      <% if @user %>
+        <%= render :partial => "global/markdownhelp" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% if defined?(show_comment) && show_comment.valid? %>
+  <div class="preview">
+    <%= render "comments/comment", :comment => show_comment %>
+  </div>
+<% end %>
+</div>

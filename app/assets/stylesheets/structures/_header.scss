@@ -1,0 +1,63 @@
+.header {
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+}
+
+  .header-left {}
+
+  .header-right {
+    &::before {
+      display: table;
+      content: " ";
+    }
+  }
+
+    .header-search-form,
+    .header-user-widget {
+      display: table-cell;
+    }
+
+    .header-search-form {
+      form {
+        float: right;
+      }
+
+      input.form-control {
+        border-radius: 2em;
+        padding: 7px 18px;
+        font-size: 0.9em;
+        line-height: 2.6em;
+        height: 2.6em;
+      }
+    }
+
+    .header-user-widget {
+      text-align: right;
+      float: right;
+      font-size: 0.8em;
+      margin-left: 1.8em;
+
+      .media-body {
+        width: auto;
+      }
+
+      .media-heading {
+        margin-bottom: 0;
+      }
+
+      .list-inline {
+        margin: 0;
+      }
+
+      a {
+        color: $dark-gray;
+      }
+
+      ul > li {
+        padding-right: 0;
+      }
+
+      a.new_messages {
+        color: $brand-red;
+      }
+    }

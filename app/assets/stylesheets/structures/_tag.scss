@@ -1,0 +1,26 @@
+.tag {
+  background: $lighter-gray;
+  font-size: 0.8em;
+  padding: 0 5px;
+  border-radius: 3px;
+  color: #777;
+
+  &:hover {
+    text-decoration: none;
+    color: #777;
+  }
+}
+
+.tag_meta {
+  background: #F1BF98;
+  color: #fff;
+
+  &:hover { color: #fff; }
+}
+
+.tag_video {
+  background: #AF9BB6;
+  color: #fff;
+
+  &:hover { color: #fff; }
+}

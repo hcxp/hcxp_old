@@ -1,0 +1,43 @@
+.nav-sub {
+  border: 1px solid $lighter-gray;
+  border-width: 1px 0;
+  margin-bottom: 1em;
+
+  .nav::after {
+    clear: both;
+    box-sizing: border-box;
+    display: table;
+    content: " ";
+  }
+
+  .nav > li {
+    font-size: 0.85em;
+    float: left;
+    margin: 0 25px 0 0;
+    position: relative;
+    display: block;
+
+    a {
+      text-transform: uppercase;
+      color: $medium-gray;
+      font-weight: 600;
+      padding: 13px 0 10px;
+      position: relative;
+      display: block;
+      border-bottom: 3px solid transparent;
+
+      &:focus {
+        background: none;
+      }
+
+      &:hover {
+        background: none;
+        border-color: $lighter-gray;
+      }
+    }
+
+    &.current > a {
+      border-color: $medium-gray;
+    }
+  }
+}

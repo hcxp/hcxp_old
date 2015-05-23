@@ -1,0 +1,56 @@
+.vote {
+  background: $lighter-gray;
+  width: 40px;
+  height: 49px;
+  text-align: center;
+  position: relative;
+  border-radius: 3px;
+
+  .score {
+    font-size: 0.8em;
+    font-weight: 700;
+    position: absolute;
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .upvoter {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid $dark-gray;
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+#downvote_why {
+  position: absolute;
+  width: 100px;
+  border: 1px solid #CCC;
+  border-bottom: 0;
+  z-index: 2;
+}
+
+  #downvote_why a {
+    background-color: #FFF;
+    color: #555;
+    border-bottom: 1px solid #CCC;
+    display: block;
+    padding: 3px;
+    font-size: 9pt;
+  }
+
+.upvoted .vote {
+  .upvoter { border-bottom: 10px solid darken($brand-orange, 15%) }
+  .score   { color: darken($brand-orange, 15%) }
+}
+
+.downvoted .vote {
+  // .upvoter { border-bottom: 10px solid $brand-red }
+  .score   { color: $brand-red }
+}

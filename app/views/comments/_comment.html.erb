@@ -1,0 +1,115 @@
+<div id="comment_<%= comment.short_id %>"
+data-shortid="<%= comment.short_id if comment.persisted? %>"
+class="media comment <%= comment.current_vote ? (comment.current_vote[:vote] == 1 ?
+"upvoted" : "downvoted") : "" %>
+  <%= comment.highlighted ? "highlighted" : "" %>
+  <%= comment.score <= 0 ? "negative" : "" %>
+  <%= comment.score <= -1 ? "negative_1" : "" %>
+  <%= comment.score <= -3 ? "negative_3" : "" %>
+  <%= comment.score <= -5 ? "negative_5" : "" %>">
+  <div class="media-left">
+    <% if !comment.is_gone? %>
+      <div class="vote cursor-pointer">
+        <% if @user %>
+          <a class="upvoter"></a>
+        <% else %>
+          <%= link_to "", login_path, :class => "upvoter" %>
+        <% end %>
+        <div class="score"><%= comment.score %></div>
+        <% if @user && @user.can_downvote?(comment) %>
+          <a class="downvoter"></a>
+        <% else %>
+          <span class="downvoter downvoter_stub"></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="media-body details" id="c_<%= comment.short_id %>">
+
+    <ul class="list-inline list-dotted media-heading byline">
+      <% if defined?(was_merged) && was_merged %>
+        <li><span class="merge"></span></li>
+      <% end %>
+
+      <li><a href="/u/<%= comment.user.username %>"
+      <% if !comment.user.is_active? %>
+        class="inactive_user"
+      <% elsif comment.user.is_new? %>
+        class="new_user"
+      <% end %>
+      ><%= comment.user.username %></a>
+
+      <% if @user && @user.show_avatars? %>
+        <img src="<%= comment.user.avatar_url(16) %>" class="avatar img-circle">
+      <% end %></li>
+
+      <% if comment.hat %>
+        <li><%= comment.hat.to_html_label %></li>
+      <% end %>
+
+      <li>
+      <% if comment.previewing %>
+        previewed
+        just now
+      <% else %>
+        <% if comment.has_been_edited? %>
+          edited
+        <% elsif comment.is_from_email? %>
+          e-mailed
+        <% end %>
+        <%= time_ago_in_words_label((comment.has_been_edited? ?
+          comment.updated_at : comment.created_at), :strip_about => true) %> ago
+      <% end %>
+      </li>
+
+      <% if !comment.previewing %>
+        <li><a href="<%= comment.url %>">link</a></li>
+
+        <% if comment.is_editable_by_user?(@user) %>
+          <li><a class="comment_editor">edit</a></li>
+        <% end %>
+
+        <% if comment.is_gone? && comment.is_undeletable_by_user?(@user) %>
+          <li><a class="comment_undeletor">undelete</a></li>
+        <% elsif !comment.is_gone? && comment.is_deletable_by_user?(@user) %>
+          <li><a class="comment_deletor">delete</a></li>
+        <% end %>
+
+        <% if @user && !comment.story.is_gone? && !comment.is_gone? %>
+            <li><a class="comment_replier">reply</a></li>
+        <% end %>
+
+        <% if comment.downvotes > 0 &&
+          ((comment.score <= 0 && comment.user_id == @user.try(:id)) ||
+          @user.try("is_moderator?")) %>
+            <span class="reason">
+              <%= comment.vote_summary.downcase %>
+            </span>
+          <% elsif comment.current_vote && comment.current_vote[:vote] == -1 %>
+            <span class="reason">
+              -1
+              <%= Vote::COMMENT_REASONS[comment.current_vote[:reason]].downcase %>
+            </span>
+          <% end %>
+      <% end %>
+
+      <% if defined?(show_story) && show_story %>
+        <li>on:
+        <a href="<%= comment.story.comments_path %>"><%= comment.story.title
+          %></a></li>
+      <% end %>
+    </ul>
+    <div class="comment_text">
+      <% if comment.is_gone? %>
+        <p>
+        <span class="na">
+        [<%= comment.gone_text %>]
+        </span>
+        </p>
+      <% else %>
+        <%= raw comment.markeddown_comment %>
+      <% end %>
+    </div>
+  </div>
+</div>

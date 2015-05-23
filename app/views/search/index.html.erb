@@ -1,0 +1,44 @@
+<div class="col-sm-12">
+  <div class="box">
+    <h1 class="legend">
+      Search
+    </div>
+
+    <%= form_tag "/search", :method => :get do %>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>Query</label>
+          <input class="form-control" type="text" name="q" value="<%= params[:q] %>"/>
+        </div>
+
+        <div class="form-group col-sm-2">
+          <label>What</label>
+          <%= select_tag 'what', options_for_select(@search_whats, @what), class: 'form-control' %>
+        </div>
+
+        <div class="form-group col-sm-2">
+          <label>Order</label>
+          <%= select_tag 'order', options_for_select(@search_orders, @order), class: 'form-control' %>
+        </div>
+
+        <div class="form-group col-sm-2">
+          <button type="submit" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @results.any? %>
+      <ol class="list-unstyled stories list">
+        <% @results.each do |res| %>
+          <%= render :partial => "stories/listdetail",
+            :locals => { :story => res } %>
+        <% end %>
+      </ol>
+    <% else %>
+      <div id="leader">
+        <em>No results found</em>
+      </div>
+    <% end %>
+
+  </div>
+</div>

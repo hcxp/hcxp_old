@@ -1,0 +1,57 @@
+.story {
+  padding: $story-padding;
+  margin-left: -$story-padding;
+  margin-right: -$story-padding;
+  margin-top: 0.2em;
+  border-radius: 3px;
+  overflow: inherit;
+
+  .avatar {
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .story-thumb img {
+    max-width: none;
+  }
+
+  & > .media-body {
+    padding-top: 2px;
+    overflow: visible;
+  }
+
+  &:hover {
+    background: lighten($brand-yellow, 33%);
+  }
+}
+
+.story-heading {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: $dark-gray;
+  line-height: 1em;
+
+  &:visited {
+    color: $medium-gray;
+  }
+}
+
+.story-byline {
+  font-size: 0.9em;
+  color: $medium-gray;
+  margin-top: 0.2em;
+
+  a {
+    color: $medium-gray;
+  }
+
+  ul > li {
+    padding-right: 0;
+  }
+}
+
+.story_content {
+  padding-left: 53px;
+  padding-top: 1.5em;
+  margin-bottom: 1.75em;
+}

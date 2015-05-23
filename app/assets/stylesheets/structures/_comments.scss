@@ -1,0 +1,37 @@
+.comment {
+  margin-bottom: 0.8em;
+
+  .markdown_help_label {
+    float: right;
+  }
+
+  .new_comment {
+    margin-bottom: 1.75em;
+  }
+
+  .edit_comment {
+    margin-bottom: 1.75em;
+  }
+}
+
+.comments {
+  margin-top: $story-padding;
+
+  .byline {
+    font-size: 0.9em;
+    color: $medium-gray;
+
+    & > li {
+      padding-right: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+  }
+
+  .preview {
+    margin-top: 0.75em;
+  }
+}

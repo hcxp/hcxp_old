@@ -1,0 +1,23 @@
+.form-horizontal .form-group {
+  margin-bottom: 1em;
+
+  &::before {
+    display: table;
+    content: " ";
+  }
+}
+
+.form-horizontal .form-group {
+  @include outer-container;
+}
+
+.form-horizontal .control-label {
+  padding-top: 7px;
+  margin-bottom: 0;
+  text-align: right;
+  @include span-columns(2)
+}
+
+.form-horizontal .form-input {
+  @include span-columns(10);
+}
