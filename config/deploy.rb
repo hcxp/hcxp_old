@@ -3,6 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require 'mina/multistage'
+require 'mina_sidekiq/tasks'
 
 set :forward_agent, true     # SSH forward_agent.
 
@@ -35,6 +36,7 @@ end
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
+    invoke :'sidekiq:quiet'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -44,6 +46,7 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
+      invoke :'sidekiq:restart'
       queue  %[echo "-----> Reloading nginx"]
       queue "mkdir -p #{deploy_to}/current/tmp/"
       queue "touch #{deploy_to}/current/tmp/restart.txt"

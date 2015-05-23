@@ -65,6 +65,7 @@ gem 'dotenv-rails'
 
 group :development do
   gem 'mina'
+  gem 'mina-sidekiq'
   gem 'mina-multistage', require: false
 end
 
