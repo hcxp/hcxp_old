@@ -76,3 +76,35 @@ Lobsters::Application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+
+class << Rails.application
+  def allow_invitation_requests?
+    true
+  end
+
+  def domain
+    "hcxp.co"
+  end
+
+  def name
+    "hcxp"
+  end
+
+  def root_url
+    Rails.application.routes.url_helpers.root_url({
+      :host => Rails.application.domain,
+      :protocol => Rails.application.ssl? ? "https" : "http",
+    })
+  end
+
+  # used as mailing list prefix and countinual prefix, cannot have spaces
+  def shortname
+    name.downcase.gsub(/[^a-z]/, "")
+  end
+
+  # whether absolute URLs should include https (does not require that
+  # config.force_ssl be on)
+  def ssl?
+    false
+  end
+end
