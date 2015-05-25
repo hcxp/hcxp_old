@@ -63,6 +63,8 @@ gem 'redcarpet'
 
 gem 'dotenv-rails'
 
+gem 'sinatra', :require => nil
+
 group :development do
   gem 'mina'
   gem 'mina-sidekiq'

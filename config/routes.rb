@@ -1,4 +1,8 @@
 Lobsters::Application.routes.draw do
+  require 'sidekiq/web'
+
+  mount Sidekiq::Web => '/sidekiq'
+
   scope :format => "html" do
     root :to => "home#index",
       :protocol => (Rails.application.config.force_ssl ? "https://" : "http://"),
