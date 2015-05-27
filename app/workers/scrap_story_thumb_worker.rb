@@ -1,6 +1,8 @@
 class ScrapStoryThumbWorker
   include Sidekiq::Worker
 
+  sidekiq_options retry: 5
+
   def perform(story_id)
     @story = Story.find(story_id)
 
@@ -13,6 +15,7 @@ class ScrapStoryThumbWorker
     end
 
   rescue => e
-    Rails.logger.warn "Thumb scrapping for story ##{story_id} failed. Reason: #{e.message}"
+    Rails.logger.error "Thumb scrapping for story ##{story_id} failed. Reason: #{e.message}"
+    fail
   end
 end
