@@ -5,6 +5,8 @@ This is the source code to the site operating at
 SQL (MariaDB in production) backend for the database and Sphinx for the search
 engine.
 
+![](http://i.imgur.com/M7PSef9.png)
+
 While you are free to fork this code and modify it (according to the [license](https://github.com/jcs/lobsters/blob/master/LICENSE))
 to run your own link aggregation website, this source code repository and bug
 tracker are only for the site operating at [lobste.rs](https://lobste.rs/).
